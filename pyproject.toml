@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jaxgl"
+version = "1.0.0"
+authors = [
+  { name="Michael Matthews", email="michael.matthews@eng.ox.ac.uk" },
+  { name="Michael Beukman", email="michael.beukman@eng.ox.ac.uk" },
+]
+description = "An simple JAX graphics library"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "jax",
+    "flax",
+    "numpy",
+    "matplotlib",
+    "imageio",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "pre-commit",
+]
+
+[project.urls]
+Homepage = "https://github.com/FLAIROx/JaxGL"
+Issues = "https://github.com/FLAIROx/JaxGL"
+
+[tool.setuptools.packages.find]
+include=["jaxgl*"]
