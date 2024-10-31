@@ -12,7 +12,7 @@
 
 JaxGL is a simple and flexible graphics library written entirely in <a href="https://github.com/google/jax">JAX</a>.  JaxGL was created by [Michael Matthews](https://github.com/MichaelTMatthews) and [Michael Beukman](https://github.com/Michael-Beukman) for the [Kinetix](https://github.com/FLAIROx/Kinetix) project.
 
-# Basic Usage
+# 💻 Basic Usage
 ```python
 # 512x512 pixels
 screen_size = (512, 512)
@@ -45,7 +45,7 @@ This produces the following image:
  <img width="20%" src="images/simple_render.png" />
 </p>
 
-# Custom Shaders
+# 👨‍💻 Custom Shaders
 Arbitrary rendering effects can be achieved by writing your own shaders.
 ```python
 screen_size = (512, 512)
@@ -99,13 +99,13 @@ pixels = circle_renderer(pixels, pos, circle_data)
  <img width="20%" src="images/custom_shader.png" />
 </p>
 
-# In Kinetix
+# 🔄 In Kinetix
 JaxGL is used for rendering in [Kinetix](https://github.com/FLAIROx/Kinetix). Shown below is an example robotics grasping task.
 <p align="center">
  <img width="40%" src="images/kinetix.png" />
 </p>
 
-# Installation
+# ⬇️ Installation
 To use JaxGL in your work you can install via PyPi:
 ```commandline
 pip install jaxgl
@@ -119,7 +119,7 @@ pip install -e ".[dev]"
 pre-commit install
 ```
 
-# See Also
+# 🔍 See Also
 - [JAX Renderer](https://github.com/JoeyTeng/jaxrenderer) A more complete JAX renderer more suitable for 3D rendering.
 - [Jax2D](https://github.com/MichaelTMatthews/Jax2D) 2D physics engine in JAX.
 - [Kinetix](https://github.com/FLAIROx/Kinetix) physics-based reinforcement learning in JAX.
