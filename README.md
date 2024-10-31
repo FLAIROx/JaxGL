@@ -4,8 +4,6 @@
         <img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue" /></a>
         <a href= "https://pypi.org/project/jaxgl/">
         <img src="https://img.shields.io/badge/pypi-1.0.0-green" /></a>
-        <a href= "https://pepy.tech/project/jaxgl">
-        <img src="https://static.pepy.tech/badge/jaxgl" /></a>
        <a href= "https://github.com/MichaelTMatthews/Craftax/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-MIT-yellow" /></a>
        <a href= "https://github.com/psf/black">
