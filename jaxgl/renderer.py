@@ -55,6 +55,8 @@ def make_renderer(screen_size, shader, patch_size, batched=False):
 
             return pixels, None
 
+        positions = jnp.maximum(positions, 0)
+
         if batched:
             pixels, _ = jax.lax.scan(_render_patch, pixels, (positions, uniforms))
         else:
