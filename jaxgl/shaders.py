@@ -191,3 +191,51 @@ def make_fragment_shader_quad_textured(tex_size, do_nearest_neighbour=False):
         return jax.lax.select((inside1 | inside2) & mask, jax.lax.select(inside1, tex_frag1, tex_frag2), current_frag)
 
     return fragment_shader_quad_textured
+
+
+def add_mask_to_shader(shader_fn):
+    """
+    Takes in a shader function and returns a new shader function that masks the first one
+    The mask is added as the final uniform parameter
+    Masking allows you to render a dynamic number of patches
+    """
+
+    @jax.jit
+    def masked_shader(position, current_frag, unit_position, uniform):
+        inner_uniforms = uniform[:-1]
+        mask = uniform[-1]
+
+        inner_fragment = shader_fn(position, current_frag, unit_position, inner_uniforms)
+        return jax.lax.select(mask, inner_fragment, current_frag)
+
+    return masked_shader
+
+
+def make_fragment_shader_convex_dynamic_ngon_with_edges(max_n, edge_thickness=2):
+    """
+    Creates a dynamic ngon shader
+    You have to statically define the max number of edges with max_n
+    But can then dynamically render different ngons by varying n
+    """
+
+    def fragment_shader_convex_dynamic_ngon(position, current_frag, unit_position, uniform):
+        vertices, colour, edge_colour, n = uniform
+        assert vertices.shape == (max_n, 2)
+
+        next_vertices_idx = (jnp.arange(max_n) + 1) % n
+        next_vertices = vertices[next_vertices_idx]
+
+        inside = True
+        on_edge = False
+        for i in range(max_n):
+            side = signed_line_distance(position, vertices[i], next_vertices[i]) / jnp.linalg.norm(
+                vertices[i] - next_vertices[i]
+            )
+            inside &= (side <= 0) | (i >= n)
+            on_edge |= (side > -edge_thickness) & (side <= 0) & (i < n)
+
+        on_edge &= inside
+
+        return jax.lax.select(inside, jax.lax.select(on_edge, edge_colour, colour), current_frag)
+
+    return fragment_shader_convex_dynamic_ngon
